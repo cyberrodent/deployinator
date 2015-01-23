@@ -44,6 +44,7 @@ module Deployinator
         # Returns true for a running deploy or false for a deploy that
         # is not running
         def is_deploy_active?(stack, stage)
+            return false
           if deployname = get_deploy_process_title(stack,stage)
             return system("pgrep -f '#{deployname}'")
           end

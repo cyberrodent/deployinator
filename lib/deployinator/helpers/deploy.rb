@@ -10,6 +10,7 @@ module Deployinator
         def get_list_of_deploys
           ret = []
           raw = `pgrep -d, -l -f Deployinator`.strip.split(",")
+
           raw.each do |deploy|
             deploy = deploy.strip
             if deploy =~ /Deployinator - deploy (\S+?):(\S+?)$/
@@ -44,9 +45,12 @@ module Deployinator
         # Returns true for a running deploy or false for a deploy that
         # is not running
         def is_deploy_active?(stack, stage)
-            return false
           if deployname = get_deploy_process_title(stack,stage)
-            return system("pgrep -f '#{deployname}'")
+            # My system ALWAYS returns true here and I don't know why
+            # Ubuntu 12.04.5 LTS
+            # So I am changing this to not use pgrep
+            return system("ps aux | grep '#{deployname}' | grep -v grep")
+            # return false
           end
           false
         end

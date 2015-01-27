@@ -1,0 +1,7 @@
+vendor/*
+.bundle/*
+*\.sw?
+log
+run_logs
+tmp
+Gemfile.lock

@@ -13,4 +13,8 @@ end
 
 task :default => 'deployinator:test:unit'
 
+task :all => 'deployinator:test:all'
+
+task :func => 'deployinator:test:functional'
+
 load 'deployinator/tasks/tests.rake'
